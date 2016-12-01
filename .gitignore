@@ -1,0 +1,11 @@
+/build/
+/dist/
+*.class
+/nbproject/private/
+/nbproject/project.properties
+/nbproject/genfiles.properties
+#Package files#
+*.jar
+*.war
+*.ear
+$RECYCLE.BIN/
