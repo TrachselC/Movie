@@ -60,6 +60,12 @@ public class Person {
     }
     
     public void addMovie(Movie movie)throws UniqueException, NullParameterException{
+        if (movie == null){
+            throw new NullParameterException("Movie is null");
+        }
+        if(movies.get(movie.getId().intValue())!= null){
+            throw new UniqueException("Movie already exist");
+        }
         this.movies.add(movie);
     }
     
