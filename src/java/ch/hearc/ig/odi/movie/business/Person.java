@@ -15,6 +15,7 @@ import java.util.List;
  * @author chloe.trachsel
  */
 public class Person {
+
     private Long id;
     private String firstName;
     private String lastName;
@@ -58,19 +59,19 @@ public class Person {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-    
-    public void addMovie(Movie movie)throws UniqueException, NullParameterException{
-        if (movie == null){
+
+    public void addMovie(Movie movie) throws UniqueException, NullParameterException {
+        if (movie == null) {
             throw new NullParameterException("Movie is null");
         }
-        if(movies.get(movie.getId().intValue())!= null){
-            throw new UniqueException("Movie already exist");
-        }
+//        if (movies.get(movie.getId().intValue()) != null) {
+//            throw new UniqueException("Movie already exist");
+//        }
         this.movies.add(movie);
     }
-    
-    public void removeMovie(Movie movie){
+
+    public void removeMovie(Movie movie) {
         this.movies.remove(movie);
     }
-    
+
 }

@@ -6,7 +6,7 @@
 <application>
         <!-- URL du package contenant les message_XX.properties -->
         <resource-bundle>
-            <base-name>ch.hearc.ig.odi.movie.bundle.message</base-name>
+            <base-name>ch.hearc.ig.odi.movie.bundle.messages</base-name>
             <var>msg</var>
         </resource-bundle>
         <!-- Ajout de la langue par défaut et des langues supportées -->
