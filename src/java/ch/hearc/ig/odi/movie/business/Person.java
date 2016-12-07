@@ -21,6 +21,9 @@ public class Person {
     private String lastName;
     private List<Movie> movies;
 
+    public Person() {
+    }
+
     public Person(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;

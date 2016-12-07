@@ -5,7 +5,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
         <f:metadata>
             <f:viewAction action="#{indexBean.initLists()}"/>
         </f:metadata>
@@ -45,7 +44,7 @@
                 </h:dataTable>
                 <h:form> 
                     <p/>
-                    <h:commandButton action="edit.xhtml" value="#{msg['index.add']}"/>
+                    <h:commandButton action="addPerson.xhtml" value="#{msg['index.add']}"/>
                     <p/>
                 </h:form>
                 <h:dataTable value="#{indexBean.movies}" var="movie">
