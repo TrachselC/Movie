@@ -6,6 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <f:metadata>
+            <f:viewAction action="#{indexBean.initLists()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="/main.xhtml">
@@ -15,46 +18,64 @@
 
             <ui:define name="content">
 
-                <h:dataTable value="#{movieListBean.moviesList}" var="movie">
-
-                    <h:column>
-                        <f:facet name="header">#{msg['movie.id']}</f:facet>
-                            #{movie.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">#{msg['movie.firstName']}</f:facet>
-                            #{movie.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">#{msg['movie.producer']}</f:facet>
-                            #{movie.producer}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">#{msg['people.count']}</f:facet>
-                        #{movieListBean.peopleCount}
-                    </h:column>
-                </h:dataTable>
-                <h:dataTable value="#{peopleListBean.peopleList}" var="pl">
+                <h:dataTable value="#{indexBean.people}" var="pl">
 
                     <h:column>
                         <f:facet name="header">#{msg['people.id']}</f:facet>
-                            #{pl.id}
+                        <h:link value="#{pl.id}" outcome="detailPerson.xhtml">
+                            <f:param name="id" value="#{pl.id}"/>
+                        </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['people.firstName']}</f:facet>
-                            #{pl.firstName}
+                        <h:link value="#{pl.firstName}" outcome="detailPerson.xhtml">
+                            <f:param name="id" value="#{pl.id}"/>
+                        </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['people.lastName']}</f:facet>
-                            #{pl.lastName}
+                        <h:link value="#{pl.lastName}" outcome="detailPerson.xhtml">
+                            <f:param name="id" value="#{pl.id}"/>
+                        </h:link>
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msg['movie.count']}</f:facet>
-                        #{peopleListBean.movieCount}
+                        <h:outputText value="#{pl.movies.size()}"/>
                     </h:column>
                 </h:dataTable>
+                <h:form> 
+                    <p/>
+                    <h:commandButton action="edit.xhtml" value="#{msg['index.add']}"/>
+                    <p/>
+                </h:form>
+                <h:dataTable value="#{indexBean.movies}" var="movie">
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.id']}</f:facet>
+                        <h:link value="#{movie.id}" outcome="detailMovie.xhtml">
+                            <f:param name="id" value="#{movie.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.firstName']}</f:facet>
+                        <h:link value="#{movie.name}" outcome="detailMovie.xhtml">
+                            <f:param name="id" value="#{movie.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.producer']}</f:facet>
+                        <h:link value="#{movie.producer}" outcome="detailMovie.xhtml">
+                            <f:param name="id" value="#{movie.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['people.count']}</f:facet>
+                        <h:outputText value="#{movie.people.size()}" />
+                    </h:column>
+                </h:dataTable>
+
             </ui:define>
             <ui:define name="bottom">
+                #{msg['bottomTitle']}
             </ui:define>
         </ui:composition>
 
