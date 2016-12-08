@@ -73,6 +73,12 @@ public class PersonBean implements Serializable {
         this.addMovie = addMovie;
     }
 
+    /**
+     * Cette méthode permet d'enregistrer une nouvelle personne. L'utilisateur
+     * est ensuite redirigé vers le détail de cette nouvelle personne
+     *
+     * @return La page de détail de cette nouvelle personne
+     */
     public String save() {
         try {
             services.savePerson(currentPerson);
@@ -83,6 +89,11 @@ public class PersonBean implements Serializable {
         return "detailPerson.xhtml?id=" + currentPerson.getId() + "faces-redirect=true";
     }
 
+    /**
+     * Permet d'ajouter un film à la personne actuelle
+     *
+     * @return Retourne la page de détail de la personne
+     */
     public String addMovieToPerson() {
         try {
             services.addMovieToPerson(currentPerson, addMovie);
@@ -92,12 +103,23 @@ public class PersonBean implements Serializable {
         return "done";
     }
 
+    /**
+     * Permet d'obtenir la liste de film que la personne actuelle n'a pas vu
+     *
+     * @return la liste des films qui ne sont pas dans sa liste de films vus
+     */
     public List<Movie> getMoviesNotAdded() {
         List<Movie> moviesNotAdded = services.getMoviesList();
         moviesNotAdded.removeAll(currentPerson.getMovies());
         return moviesNotAdded;
     }
 
+    /**
+     * Supprime un film pour la personne actuel (enregistré dans currentPerson)
+     *
+     * @param movie est le film que l'on veut supprimé pour la personne
+     * @return La page de détail de la personne
+     */
     public String removeMovie(Movie movie) {
         try {
             services.removeMovieFromPerson(currentPerson, movie);

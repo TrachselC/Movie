@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <f:metadata>
+            <f:viewParam name="id" value="#{personBean.id}"/>
+            <f:viewAction action="#{personBean.initPersonBean()}"/>
+        </f:metadata>
+    </h:head>
+
+    <h:body>
+
+       <ui:composition template="/main.xhtml">
+            <ui:define name="top">
+
+                <h:panelGroup rendered="#{movieBean.id == null}">
+                    <h2> #{msg['movie.add.title']}</h2>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{movieBean.id != null}">
+                    <h2>#{msg['movie.edit.title']}</h2>
+                </h:panelGroup>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid border="0" columns="2">
+                        <h:panelGroup id="idOut" rendered="#{movieBean.id != null}">
+                            <h:outputLabel value="#{msg['movie.id']}"/>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup id="idIn" rendered="#{movieBean.id != null}">
+                            <h:inputText readonly="true" disabled="true" value="#{movieBean.currentMovie.id}"/>
+                        </h:panelGroup>
+                        
+                        <h:outputLabel value="#{msg['movie.firstName']}"/>
+                        <h:inputText value="#{movieBean.currentMovie.name}"/>
+                        <h:outputText value="#{msg['movie.producer']}"/>
+                        <h:inputText value="#{movieBean.currentMovie.producer}"/>
+                    </h:panelGrid>    
+                    <h:commandButton id="reset" value="#{msg['button.reinit']}" type="reset" />
+                    <h:commandButton id="submit" value="#{msg['button.valid']}" action="#{movieBean.save()}" type="submit" />
+                    <h:button id="cancel" value="#{msg['button.cancel']}" outcome="index.xhtml"/>  
+                </h:form>
+
+            </ui:define>
+            <ui:define name="bottom">#{msg['bottomTitle']}</ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
