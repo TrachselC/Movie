@@ -67,14 +67,16 @@ public class Person {
         if (movie == null) {
             throw new NullParameterException("Movie is null");
         }
-//        if (movies.get(movie.getId().intValue()) != null) {
-//            throw new UniqueException("Movie already exist");
-//        }
+        if (movies.contains(movie)) {
+            throw new UniqueException("Movie already exist");
+        }
         this.movies.add(movie);
+        movie.addPerson(this);
     }
 
     public void removeMovie(Movie movie) {
         this.movies.remove(movie);
+        movie.removePerson(this);
     }
 
 }

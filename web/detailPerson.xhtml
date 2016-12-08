@@ -18,7 +18,7 @@
     <h:body>
         <ui:composition template="/main.xhtml">
             <ui:define name="top">#{msg['people.add.title']}</ui:define>
-            
+
             <ui:define name="content">
                 <h:form>
                     <h:panelGrid border="0" columns="2">
@@ -28,70 +28,62 @@
                         <h:outputText value="#{personBean.currentPerson.firstName}"/>
                         <h:outputLabel value="#{msg['people.lastName']}"/>
                         <h:outputText value="#{personBean.currentPerson.lastName}"/>
-                        
                     </h:panelGrid>
                     <h:button outcome="addPerson.xhtml" value="#{msg['button.edit']}">
                         <f:param name="id" value="#{personBean.currentPerson.id}"/>
                     </h:button>
-                    
-                </h:form>
-                
-                <h1>#{msg['movie.text']}</h1>
-                <h:dataTable value="#{personBean.currentPerson.movies}" var="movie">
-                    <h:column>
-                        <f:facet name="header">#{msg['movie.id']}</f:facet>
-                        <h:link value="#{movie.id}" outcome="detailMovie.xhtml">
-                            <f:param name="id" value="#{movie.id}"/>
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">#{msg['movie.firstName']}</f:facet>
-                        <h:link value="#{movie.name}" outcome="detailMovie.xhtml">
-                            <f:param name="id" value="#{movie.id}"/>
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">#{msg['movie.producer']}</f:facet>
-                        <h:link value="#{movie.producer}" outcome="detailMovie.xhtml">
-                            <f:param name="id" value="#{movie.id}"/>
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        
-                        <f:facet name="header">
-                        <h:outputText value="" />
-                    </f:facet>
-                        <h:form>
-                            <!-- ne se render pas tout seul !!-->
-                    <h:commandButton value="#{msg['button.delete']}">
-                        <f:ajax listener="#{personBean.removeMovie(movie)}" render="/detailPerson" />
-                        <f:param name="id" value="#{personBean.currentPerson.id}"/>
-                    </h:commandButton>
-                        </h:form>
+
+                    <h1>#{msg['movie.text']}</h1>
+                    <h:dataTable value="#{personBean.currentPerson.movies}" var="movie">
+                        <h:column>
+                            <f:facet name="header">#{msg['movie.id']}</f:facet>
+                            <h:link value="#{movie.id}" outcome="detailMovie.xhtml">
+                                <f:param name="id" value="#{movie.id}"/>
+                            </h:link>
                         </h:column>
-                </h:dataTable>
-                
-                <p>#{msg['addNewFilm']}</p>
-                <h:form>
-                <h:selectOneMenu id="lovMovie" value="#{personBean.addMovie}">
-                    <f:converter binding="#{movieLOVConverter}"/>
-                    <f:selectItems value="#{personBean.moviesNotAdded}" var="movie" itemLabel="#{movie.name}"/>
-                </h:selectOneMenu>
-                
+                        <h:column>
+                            <f:facet name="header">#{msg['movie.firstName']}</f:facet>
+                            <h:link value="#{movie.name}" outcome="detailMovie.xhtml">
+                                <f:param name="id" value="#{movie.id}"/>
+                            </h:link>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg['movie.producer']}</f:facet>
+                            <h:link value="#{movie.producer}" outcome="detailMovie.xhtml">
+                                <f:param name="id" value="#{movie.id}"/>
+                            </h:link>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="" />
+                            </f:facet>
+                            <!-- ne se render pas tout seul !!-->
+                            <h:commandLink value="#{msg['button.delete']}">
+                                <f:ajax listener="#{personBean.removeMovie(movie)}" render="@form" />
+                            </h:commandLink>
+                        </h:column>
+                    </h:dataTable>
+
+                    <p>#{msg['addNewFilm']}</p>
+
+                    <h:selectOneMenu id="lovMovie" value="#{personBean.addMovie}">
+                        <f:converter binding="#{movieLOVConverter}"/>
+                        <f:selectItems value="#{personBean.moviesNotAdded}" var="movie" itemLabel="#{movie.name}"/>
+                    </h:selectOneMenu>
+
                     <h:commandButton value="#{msg['index.add']}">
-                        <f:ajax execute="lovMovies" listener="#{personBean.addMovieToPerson()}" render="@form"/>
-                        
+                        <f:ajax execute="lovMovie" listener="#{personBean.addMovieToPerson()}" render="@form"/>
                     </h:commandButton>                    
                 </h:form>
-                
+
                 <h:button id="cancel" value="#{msg['homePage']}" outcome="index.xhtml"/>
             </ui:define>
-         
+
 
             <ui:define name="bottom">#{msg['bottomTitle']}</ui:define>
-        
 
-     </ui:composition>
+
+        </ui:composition>
     </h:body>
 
 </html>

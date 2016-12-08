@@ -32,15 +32,17 @@
                     <h:panelGrid border="0" columns="2">
                         <h:panelGroup id="idOut" rendered="#{personBean.id != null}">
                             <h:outputLabel value="#{msg['people.id']}"/>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup id="idIn" rendered="#{personBean.id != null}">
                             <h:inputText readonly="true" disabled="true" value="#{personBean.currentPerson.id}"/>
                         </h:panelGroup>
-
+                        
                         <h:outputLabel value="#{msg['people.firstName']}"/>
                         <h:inputText value="#{personBean.currentPerson.firstName}"/>
                         <h:outputText value="#{msg['people.lastName']}"/>
                         <h:inputText value="#{personBean.currentPerson.lastName}"/>
-
-                    </h:panelGrid>
+                    </h:panelGrid>    
                     <h:commandButton id="reset" value="#{msg['button.reinit']}" type="reset" />
                     <h:commandButton id="submit" value="#{msg['button.valid']}" action="#{personBean.save()}" type="submit" />
                     <h:button id="cancel" value="#{msg['button.cancel']}" outcome="index.xhtml"/>  

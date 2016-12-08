@@ -89,7 +89,7 @@ public class PersonBean implements Serializable {
         } catch (UniqueException | NullParameterException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        return "detailPerson.xhtml?id=" + currentPerson.getId() + "faces-redirect=true";
+        return "done";
     }
 
     public List<Movie> getMoviesNotAdded() {
@@ -104,6 +104,6 @@ public class PersonBean implements Serializable {
         } catch (NullParameterException | InvalidParameterException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
         }
-        return "detailPerson.xhtml?id=" + currentPerson.getId() + "faces-redirect=true";
+        return "done";
     }
 }

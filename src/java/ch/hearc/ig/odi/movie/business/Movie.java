@@ -56,6 +56,14 @@ public class Movie {
     public void setPeople(List<Person> people) {
         this.people = people;
     }
+
+    void removePerson(Person person) {
+        this.people.remove(person);
+    }
+
+    void addPerson(Person person) {
+        this.people.add(person);
+    }
     
     
 }

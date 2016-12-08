@@ -3,7 +3,7 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-<application>
+    <application>
         <!-- URL du package contenant les message_XX.properties -->
         <resource-bundle>
             <base-name>ch.hearc.ig.odi.movie.bundle.messages</base-name>
@@ -14,5 +14,19 @@
             <default-locale>fr</default-locale>
             <supported-locale>en</supported-locale>
         </locale-config>
+        
+        <navigation-rule>
+            <from-view-id>detailPerson.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{personBean.removeMovie(movie)}</from-action>
+                <from-outcome>done</from-outcome>
+                <to-view-id>/detailPerson.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>#{personBean.addMovieToPerson()}</from-action>
+                <from-outcome>done</from-outcome>
+                <to-view-id>/detailPerson.xhtml</to-view-id>
+            </navigation-case>            
+        </navigation-rule>
     </application>
 </faces-config>
