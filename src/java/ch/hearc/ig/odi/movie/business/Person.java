@@ -22,13 +22,14 @@ public class Person {
     private List<Movie> movies;
 
     public Person() {
+        this.movies = new ArrayList<>();
     }
 
     public Person(Long id, String firstName, String lastName) {
+        this();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.movies = new ArrayList<>();
     }
 
     public Long getId() {
