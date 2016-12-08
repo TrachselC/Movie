@@ -15,16 +15,21 @@ import java.util.List;
  * @author chloe.trachsel
  */
 public class Person {
+
     private Long id;
     private String firstName;
     private String lastName;
     private List<Movie> movies;
 
+    public Person() {
+        this.movies = new ArrayList<>();
+    }
+
     public Person(Long id, String firstName, String lastName) {
+        this();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.movies = new ArrayList<>();
     }
 
     public Long getId() {
@@ -58,19 +63,21 @@ public class Person {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-    
-    public void addMovie(Movie movie)throws UniqueException, NullParameterException{
-        if (movie == null){
+
+    public void addMovie(Movie movie) throws UniqueException, NullParameterException {
+        if (movie == null) {
             throw new NullParameterException("Movie is null");
         }
-        if(movies.get(movie.getId().intValue())!= null){
+        if (movies.contains(movie)) {
             throw new UniqueException("Movie already exist");
         }
         this.movies.add(movie);
+        movie.addPerson(this);
     }
-    
-    public void removeMovie(Movie movie){
+
+    public void removeMovie(Movie movie) {
         this.movies.remove(movie);
+        movie.removePerson(this);
     }
-    
+
 }

@@ -18,11 +18,15 @@ public class Movie {
     private String producer;
     private List<Person> people;
 
+    public Movie() {
+        this.people = new ArrayList<>();
+    }
+
     public Movie(Long id, String name, String producer) {
+        this();
         this.id = id;
         this.name = name;
         this.producer = producer;
-        this.people = new ArrayList<>();
     }
 
     public Long getId() {
@@ -55,6 +59,14 @@ public class Movie {
 
     public void setPeople(List<Person> people) {
         this.people = people;
+    }
+
+    void removePerson(Person person) {
+        this.people.remove(person);
+    }
+
+    void addPerson(Person person) {
+        this.people.add(person);
     }
     
     

@@ -2,16 +2,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <f:metadata>
+            <f:viewAction action="#{indexBean.initLists()}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="/main.xhtml">
             <ui:define name="top">
-        Hello from Facelets
-        </ui:define>
-            </ui:composition>
+                #{msg['title']}
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h:dataTable value="#{indexBean.people}" var="pl">
+
+                    <h:column>
+                        <f:facet name="header">#{msg['people.id']}</f:facet>
+                        <h:link value="#{pl.id}" outcome="detailPerson.xhtml">
+                            <f:param name="id" value="#{pl.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['people.firstName']}</f:facet>
+                        <h:link value="#{pl.firstName}" outcome="detailPerson.xhtml">
+                            <f:param name="id" value="#{pl.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['people.lastName']}</f:facet>
+                        <h:link value="#{pl.lastName}" outcome="detailPerson.xhtml">
+                            <f:param name="id" value="#{pl.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.count']}</f:facet>
+                        <h:outputText value="#{pl.movies.size()}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:form> 
+                    <p/>
+                    <h:button outcome="addPerson.xhtml" value="#{msg['index.add']}"/>
+                    <p/>
+                </h:form>
+                <h:dataTable value="#{indexBean.movies}" var="movie">
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.id']}</f:facet>
+                        <h:link value="#{movie.id}" outcome="detailMovie.xhtml">
+                            <f:param name="id" value="#{movie.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.firstName']}</f:facet>
+                        <h:link value="#{movie.name}" outcome="detailMovie.xhtml">
+                            <f:param name="id" value="#{movie.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['movie.producer']}</f:facet>
+                        <h:link value="#{movie.producer}" outcome="detailMovie.xhtml">
+                            <f:param name="id" value="#{movie.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{msg['people.count']}</f:facet>
+                        <h:outputText value="#{movie.people.size()}" />
+                    </h:column>
+                </h:dataTable>
+
+            </ui:define>
+            <ui:define name="bottom">
+                #{msg['bottomTitle']}
+            </ui:define>
+        </ui:composition>
+
     </h:body>
 </html>
 
